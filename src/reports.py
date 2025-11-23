@@ -1,11 +1,17 @@
-import json
 import logging
 from datetime import datetime, timedelta
 from typing import Optional
 
 import pandas as pd
 
-from config import PATH_TO_OPERATIONS
+from config import PATH_TO_LOGGER
+
+logger = logging.getLogger(__name__)
+file_handler = logging.FileHandler(PATH_TO_LOGGER / __file__)
+file_formatter = logging.Formatter("{asctime} {levelname}: {message}", style="{")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+logger.setLevel(logging.INFO)
 
 
 def spending_by_category(transactions: pd.DataFrame, category: str, date: Optional[str] = None) -> pd.DataFrame:
@@ -47,10 +53,12 @@ def spending_by_category(transactions: pd.DataFrame, category: str, date: Option
     )
 
     # Сортируем по месяцам
+    logger.info("Выполняется сортировка по месяцам")
     monthly_spending = monthly_spending.sort_index()
     monthly_spending["Категория"] = category
     monthly_spending = monthly_spending.reset_index()
     monthly_spending["Месяц"] = monthly_spending["Месяц"].astype(str)
     monthly_spending["Сумма трат"] = monthly_spending["Сумма трат"].abs()
+    logger.info("Вывод ответа программы")
 
     return monthly_spending

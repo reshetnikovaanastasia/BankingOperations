@@ -1,10 +1,16 @@
 import json
+import logging
 
-import requests
-
-from config import PATH_TO_OPERATIONS
+from config import PATH_TO_OPERATIONS,PATH_TO_LOGGER
 from src.utils import (get_cards, get_currency_rates, get_operations_with_range, get_stock_prices,
                        get_top_transactions, greeting, read_excel)
+
+logger = logging.getLogger(__name__)
+file_handler = logging.FileHandler(PATH_TO_LOGGER / __file__)
+file_formatter = logging.Formatter("{asctime} {levelname}: {message}", style="{")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+logger.setLevel(logging.INFO)
 
 
 def main_page(date):
@@ -12,6 +18,7 @@ def main_page(date):
     get_currency_rates, get_stock_prices) в главной функции, принимающей на вход строку
     с датой и временем в формате YYYY-MM-DD HH:MM:SS и возвращающую JSON-ответ со следующими данными:
     из функций"""
+    logger.info("Запуск череды функций страницы 'Главная'")
     answer = {}
     answer["greeting"] = greeting()
     data_df = read_excel(PATH_TO_OPERATIONS)
