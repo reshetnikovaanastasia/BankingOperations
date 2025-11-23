@@ -3,10 +3,10 @@ import logging
 
 import pandas as pd
 
-from config import PATH_TO_OPERATIONS, PATH_TO_LOGGER
+from config import PATH_TO_LOGGER, PATH_TO_OPERATIONS
 
 logger = logging.getLogger(__name__)
-file_handler = logging.FileHandler(PATH_TO_LOGGER / __file__)
+file_handler = logging.FileHandler(PATH_TO_LOGGER /  __name__)
 file_formatter = logging.Formatter("{asctime} {levelname}: {message}", style="{")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)

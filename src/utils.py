@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from config import PATH_TO_LOGGER, PATH_TO_USER_SETTINGS
 
 logger = logging.getLogger(__name__)
-file_handler = logging.FileHandler(PATH_TO_LOGGER / __file__)
+file_handler = logging.FileHandler(PATH_TO_LOGGER / __name__)
 file_formatter = logging.Formatter("{asctime} {levelname}: {message}", style="{")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
@@ -102,7 +102,7 @@ def get_top_transactions(operаtions_range):
 
 
 def get_currency_rates():
-    """Возвращает курсы валют"""
+    """Возвращает актуальные курсы валют"""
     payload = {}
     cur_data = load_user_settings()
     currency = cur_data["user_currencies"]
@@ -122,7 +122,7 @@ def get_currency_rates():
 
 
 def get_stock_prices():
-    """Возвращает курсы акций"""
+    """Возвращает актуальные курсы акций"""
     stock_prices = []
     stock_data = load_user_settings()
     user_stocks = stock_data["user_stocks"]

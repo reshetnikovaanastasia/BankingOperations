@@ -6,7 +6,7 @@ from src.utils import (get_cards, get_currency_rates, get_operations_with_range,
                        get_top_transactions, greeting, read_excel)
 
 logger = logging.getLogger(__name__)
-file_handler = logging.FileHandler(PATH_TO_LOGGER / __file__)
+file_handler = logging.FileHandler(PATH_TO_LOGGER /  __name__)
 file_formatter = logging.Formatter("{asctime} {levelname}: {message}", style="{")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
