@@ -1,11 +1,17 @@
-import requests
-from src.utils import (greeting, read_excel, get_operations_with_range, get_cards, get_top_transactions,
-                       get_currency_rates, get_stock_prices)
-from config import PATH_TO_OPERATIONS
 import json
+
+import requests
+
+from config import PATH_TO_OPERATIONS
+from src.utils import (get_cards, get_currency_rates, get_operations_with_range, get_stock_prices,
+                       get_top_transactions, greeting, read_excel)
 
 
 def main_page(date):
+    """Набор функций (greeting, read_excel, get_operations_with_range, get_cards, get_top_transactions,
+    get_currency_rates, get_stock_prices) в главной функции, принимающей на вход строку
+    с датой и временем в формате YYYY-MM-DD HH:MM:SS и возвращающую JSON-ответ со следующими данными:
+    из функций"""
     answer = {}
     answer["greeting"] = greeting()
     data_df = read_excel(PATH_TO_OPERATIONS)
@@ -16,6 +22,3 @@ def main_page(date):
     answer["stock_prices"] = get_stock_prices()
 
     return json.dumps(answer, ensure_ascii=False, indent=4)
-
-
-print(main_page("2021-12-12 12:12:12"))

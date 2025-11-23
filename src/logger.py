@@ -9,7 +9,7 @@ def get_logger(filename):
 
     file_handler = logging.FileHandler(PATH_TO_LOGGER / filename)
 
-    file_formatter = logging.Formatter('{asctime} {levelname}: {message}', style="{")
+    file_formatter = logging.Formatter("{asctime} {levelname}: {message}", style="{")
     file_handler.setFormatter(file_formatter)
 
     logger.addHandler(file_handler)
