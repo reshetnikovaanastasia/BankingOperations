@@ -1,7 +1,7 @@
 import json
 import logging
 
-from config import PATH_TO_OPERATIONS,PATH_TO_LOGGER
+from config import PATH_TO_LOGGER, PATH_TO_OPERATIONS
 from src.utils import (get_cards, get_currency_rates, get_operations_with_range, get_stock_prices,
                        get_top_transactions, greeting, read_excel)
 
